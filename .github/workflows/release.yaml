@@ -7,34 +7,13 @@ on:
       - v*
 
 jobs:
-  prepare:
-    runs-on: ubuntu-22.04
-    outputs:
-      version_tag: ${{ steps.version_tag.outputs.value }}
-      build_date: ${{ steps.build_date.outputs.value }}
-    steps:
-      - name: Format version tag
-        shell: bash
-        id: version_tag
-        run: |
-          TAG=${GITHUB_REF#refs/*/}
-          echo "value=$TAG" >> $GITHUB_OUTPUT
-      - name: Build date
-        shell: bash
-        id: build_date
-        run: echo "value=$(date +%FT%T%z)" >> $GITHUB_OUTPUT
-
   release:
-    needs:
-      - prepare
     permissions:
       packages: write
       contents: write
       attestations: write
       id-token: write
     runs-on: ubuntu-22.04
-    env:
-      VERSION_TAG: ${{ needs.prepare.outputs.version_tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
