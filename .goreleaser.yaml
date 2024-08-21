@@ -7,9 +7,9 @@ builds:
       - CGO_ENABLED=0
     ldflags:
       - >
-        -X github.com/vietanhduon/ewol/pkg/config.version={{.Tag}}
-          -X github.com/vietanhduon/ewol/pkg/config.commit={{.Commit}}
-          -X github.com/vietanhduon/ewol/pkg/config.buildDate={{.Date}}
+        -X github.com/vietanhduong/ewol/pkg/config.version={{.Tag}}
+          -X github.com/vietanhduong/ewol/pkg/config.commit={{.Commit}}
+          -X github.com/vietanhduong/ewol/pkg/config.buildDate={{.Date}}
     goos:
       - darwin
       - linux
