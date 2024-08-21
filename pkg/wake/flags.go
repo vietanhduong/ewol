@@ -15,7 +15,7 @@ const (
 )
 
 func RegisterFlags(fs *pflag.FlagSet) {
-	fs.StringP(ipFlag, "i", "255.255.255.255", "Destination IP address. Unless you have static ARP tables you should use some kind of broadcast address (the broadcast address of the network where the computer resides or the limited broadcast address)")
+	fs.StringP(ipFlag, "i", "255.255.255.255", "Destination IP address. Unless you have static ARP tables, you should use some kind of broadcast address (the broadcast address of the network where the computer resides or the limited broadcast address)")
 	fs.Uint16P(portFlag, "p", 9, "Destination port")
 	fs.StringP(secretFlag, "s", "", "Secret key which will be used as a simple auth. Only work if you enable serve mode")
 }

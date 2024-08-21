@@ -1,0 +1,48 @@
+project_name: ewol
+version: 2
+
+builds:
+  - binary: ewol
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - >
+        -X github.com/vietanhduon/ewol/pkg/config.version={{.Tag}}
+          -X github.com/vietanhduon/ewol/pkg/config.commit={{.Commit}}
+          -X github.com/vietanhduon/ewol/pkg/config.buildDate={{.Date}}
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm
+      - arm64
+
+changelog:
+  use: git
+  groups:
+    - title: Features
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 0
+    - title: "Bug fixes"
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 1
+    - title: Others
+      order: 999
+
+release:
+  name_template: "{{.Tag}}"
+  extra_files:
+    - glob: ./builds/*
+
+archives:
+  - files:
+      - LICENSE
+      - README.md
+    format: binary
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}-next"

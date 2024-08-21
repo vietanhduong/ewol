@@ -1,15 +1,15 @@
 package config
 
 var (
-	commit  = "unknown"
-	date    = "unknown"
-	version = "unknown"
+	commit    = "unknown"
+	buildDate = "unknown"
+	version   = "unknown"
 )
 
 func PrintVersion() {
 	println("Version:", version)
 	println("Commit:", commit)
-	println("Date:", date)
+	println("Build Date:", buildDate)
 }
 
 func UserAgent() string {

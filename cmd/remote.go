@@ -21,7 +21,13 @@ func newRemoteCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "remote REMOTE_ADDRESS",
 		Short: "Remote Wake on LAN for an eWoL server",
-		Long:  `NOTE: This command ONLY available for an eWoL server`,
+		Long:  `NOTE: This command is ONLY available for an eWoL server`,
+		Example: `# Simple remote wake up
+$ ewol remote http://localhost:8080
+
+# Remote wake up with secret key
+$ ewol remote http://localhost:8080 --wake.secret mysecret
+`,
 		Args: func(cmd *cobra.Command, args []string) error {
 			if cli.ShouldPrintVersion(cmd) {
 				return nil
@@ -76,7 +82,7 @@ func newRemoteCmd() *cobra.Command {
 			return nil
 		},
 	}
-	cli.AddFlags(v, cmd, logging.RegisterFlags)
 	cmd.Flags().StringVarP(&secret, "wake.secret", "s", "", "Secret key to wake up the device")
+	cli.AddFlags(v, cmd, logging.RegisterFlags)
 	return cmd
 }
